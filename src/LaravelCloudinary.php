@@ -1,6 +1,6 @@
 <?php
 
-namespace Ijalnasution\LaravelCloudinary;
+namespace ijalnasution\LaravelCloudinary;
 
 use Cloudinary;
 use Cloudinary\Api;

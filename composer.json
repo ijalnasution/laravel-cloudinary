@@ -1,0 +1,55 @@
+{
+    "name": "ijalnasution/laravel-cloudinary",
+    "description": "Cloudinary API Wrapper for Laravel",
+    "keywords": [
+      "laravel",
+      "cloudinary",
+      "library"
+    ],
+    "type": "library",
+    "require": {
+      "php": ">=7.2.0",
+      "jrm2k6/cloudder": "^0.6",
+      "cloudinary/cloudinary_php": "dev-master"
+    },
+    "require-dev": {
+      "orchestra/testbench": "^4.0"
+    },
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Syah Rizal",
+        "email": "ijalnasution107@gmail.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": {
+        "ijalnasution\\LaravelCloudinary\\": "src/"
+      }
+    },
+    "autoload-dev": {
+      "psr-4": {
+        "ijalnasution\\LaravelCloudinary\\Tests\\": "tests/"
+      }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true ,
+    "config": {
+      "sort-packages": true
+    },
+    "scripts": {
+      "test": [
+        "@php vendor/bin/phpunit -c ./ --color"
+      ]
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+          "ijalnasution\\LaravelCloudinary\\LaravelCloudinaryServiceProvider"
+        ],
+        "aliases": {
+          "Debugbar": "ijalnasution\\LaravelCloudinary\\Facades\\LaravelCloudinaryFacade"
+        }
+      }
+    }
+  }

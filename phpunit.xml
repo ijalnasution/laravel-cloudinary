@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+     backupStaticAttributes="false"
+     bootstrap="vendor/autoload.php"
+     colors="true"
+     convertErrorsToExceptions="true"
+     convertNoticesToExceptions="true"
+     convertWarningsToExceptions="true"
+     processIsolation="false"
+     stopOnFailure="false"
+     verbose="true"
+>
+
+    <testsuites>
+        <testsuite name="ijalnasution\Cloupload Test Suite">
+            <directory suffix="Test.php">./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="CLOUDINARY_CLOUD_NAME" value="ijalnasution" />
+        <env name="CLOUDINARY_BASE_URL" value="http://res.cloudinary.com/ijalnasution" />
+        <env name="CLOUDINARY_SECURE_URL" value="https://res.cloudinary.com/ijalnasution" />
+        <env name="CLOUDINARY_API_BASE_URL" value="https://api.cloudinary.com/v1_1/ijalnasution" />
+        <env name="CLOUDINARY_API_KEY" value="173575766931644" />
+        <env name="CLOUDINARY_API_SECRET" value="Bv6Lg1TRkY1t48MD159eEtCM_Ec" />
+    </php>
+</phpunit>

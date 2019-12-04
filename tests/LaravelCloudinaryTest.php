@@ -24,7 +24,7 @@ class GeneralTest extends \Orchestra\Testbench\TestCase
         $cloudinary = new LaravelCloudinary();
 
         // when
-        $response = $cloudinary->uploadImage('http://res.cloudinary.com/demo/image/upload/couple.jpg');
+        $response = $cloudinary->uploadImage('http://res.cloudinary.com/demo/image/upload/couple.jpg', 'dev-product', 'SKU0001');
 
         // then
         $expectedKey = 'url';
@@ -43,7 +43,7 @@ class GeneralTest extends \Orchestra\Testbench\TestCase
 
         $cloudinary = new LaravelCloudinary();
 
-        $response = $cloudinary->multipleUploadImages($images);
+        $response = $cloudinary->multipleUploadImages($images, 'dev-product', 'SKU0001');
 
         dd($response);
     }

@@ -23,18 +23,28 @@ class LaravelCloudinary extends CloudinaryWrapper
         $this->env = $env;
     }
 
-    public function uploadImage(String $imagePath)
+    public function uploadImage(String $imagePath, string $folder, string $filename)
     {
-        $uploaded = $this->cloudinaryWrapper->upload($imagePath);
+        $options = [
+            'public_id' => $filename,
+            'folder' => $folder
+        ];
+
+        $uploaded = $this->cloudinaryWrapper->upload($imagePath, null, $options);
 
         return $uploaded->uploadedResult;
     }
 
-    public function multipleUploadImages(array $imagePaths)
+    public function multipleUploadImages(array $imagePaths, string $folder, string $filename)
     {
         $results = [];
-        foreach ($imagePaths as $imagePath) {
-            $uploaded = $this->cloudinaryWrapper->upload($imagePath);
+        foreach ($imagePaths as $key => $imagePath) {
+            $options = [
+                'public_id' => $key === 0 ? $filename : $filename.'_'.$key,
+                'folder' => $folder
+            ];
+
+            $uploaded = $this->cloudinaryWrapper->upload($imagePath, null, $options);
 
             array_push($results, $uploaded->uploadedResult);
         }

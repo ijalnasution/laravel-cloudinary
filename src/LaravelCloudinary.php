@@ -23,12 +23,14 @@ class LaravelCloudinary extends CloudinaryWrapper
         $this->env = $env;
     }
 
-    public function uploadImage(String $imagePath, string $folder, string $filename)
+    public function uploadImage(String $imagePath, string $folder, string $filename, array $otherOptions)
     {
         $options = [
             'public_id' => $filename,
             'folder' => $folder
         ];
+
+        $options = array_merge($options, $otherOptions);
 
         $uploaded = $this->cloudinaryWrapper->upload($imagePath, null, $options);
 

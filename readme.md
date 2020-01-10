@@ -20,7 +20,7 @@ use LaravelCloudinary;
 
 $image = "http://res.cloudinary.com/demo/image/upload/couple.jpg";
 
-LaravelCloudinary::uploadImage($image, $folderName, $fileName);
+LaravelCloudinary::uploadImage($image, $folderName, $fileName, $options);
 ```
 
 #### Upload Multiple Image
@@ -33,7 +33,7 @@ $images = [
     'https://res.cloudinary.com/demo/image/upload/sofa_cat.jpg'
 ];
 
-LaravelCloudinary::multipleUploadImages($images, $folderName, $fileName);
+LaravelCloudinary::multipleUploadImages($images, $folderName, $fileName, $options);
 ```
 
 ## Contribute

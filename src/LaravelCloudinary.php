@@ -9,6 +9,9 @@ use JD\Cloudder\CloudinaryWrapper;
 
 class LaravelCloudinary extends CloudinaryWrapper
 {
+    const IMAGE_TYPE = 'image';
+    const VIDEO_TYPE = 'video';
+
     protected $builder;
 
     public $env = 'dev';
@@ -23,7 +26,7 @@ class LaravelCloudinary extends CloudinaryWrapper
         $this->env = $env;
     }
 
-    public function uploadImage(String $imagePath, string $folder, string $filename, array $otherOptions = [])
+    public function uploadMedia(String $type, String $mediaPath, string $folder, string $filename, array $otherOptions = [])
     {
         $options = [
             'public_id' => $filename,
@@ -32,23 +35,43 @@ class LaravelCloudinary extends CloudinaryWrapper
 
         $options = array_merge($options, $otherOptions);
 
-        $uploaded = $this->cloudinaryWrapper->upload($imagePath, null, $options);
+        try {
+            if ($type === self::IMAGE_TYPE) {
+                $uploaded = $this->cloudinaryWrapper->upload($mediaPath, null, $options);
 
-        return $uploaded->uploadedResult;
+                return $uploaded->uploadedResult;
+            } else if ($type === self::VIDEO_TYPE) {
+                $uploaded = $this->cloudinaryWrapper->uploadVideo($mediaPath, null, $options);
+
+                return $uploaded->uploadedResult;
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Wrong Media Type", 1);
+        }
     }
 
-    public function multipleUploadImages(array $imagePaths, string $folder, string $filename)
+    public function multipleUploadMedias(String $type, array $mediaPaths, string $folder, string $filename)
     {
         $results = [];
-        foreach ($imagePaths as $key => $imagePath) {
+        foreach ($mediaPaths as $key => $mediaPath) {
             $options = [
                 'public_id' => $key === 0 ? $filename : $filename.'_'.$key,
                 'folder' => $folder
             ];
 
-            $uploaded = $this->cloudinaryWrapper->upload($imagePath, null, $options);
+            try {
+                if ($type === self::IMAGE_TYPE) {
+                    $uploaded = $this->cloudinaryWrapper->upload($mediaPath, null, $options);
 
-            array_push($results, $uploaded->uploadedResult);
+                    array_push($results, $uploaded->uploadedResult);
+                } else if ($type === self::VIDEO_TYPE) {
+                    $uploaded = $this->cloudinaryWrapper->uploadVideo($mediaPath, null, $options);
+
+                    array_push($results, $uploaded->uploadedResult);
+                }
+            } catch (\Throwable $th) {
+                throw new Exception("Wrong Media Type", 1);
+            }
         }
 
         return $results;
